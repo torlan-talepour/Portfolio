@@ -1,6 +1,6 @@
 # Torlan Talepour — bilingual portfolio
 
-A Next.js App Router portfolio with English and Persian routes, responsive editorial layouts, genuine Learnify exports, and reusable project pages. Built with React, strict TypeScript, Tailwind CSS 4, and ESLint. No backend, account, CMS, or paid service is required.
+An interactive design-studio portfolio built on Next.js App Router, with English and Persian routes, a spatial composition board, a live component playground, genuine Learnify screen exploration, and editorial project pages. Built with React, strict TypeScript, Tailwind CSS 4, and ESLint. No backend, account, CMS, or paid service is required.
 
 ## Develop
 
@@ -26,9 +26,13 @@ Use `npm ci` for reproducible dependency installs; commit `package-lock.json`. T
 
 - `src/app/[locale]`: localized root layout, homepage, and project routes
 - `src/app/(entry)`: default English redirect
-- `src/components`: shared UI, with client code only for menu/language interactions and copying email
+- `src/components`: shared UI, with focused client components for navigation, copying email, the composition board, screen exploration, the lab, and motion observation
 - `src/data/portfolio.ts`: designer facts, project definitions, images, optional content blocks, and skills
 - `src/data/messages.ts`: English and Persian interface copy
+- `src/data/studio.ts`: localized redesign and playground text
+- `src/components/design-lab.tsx`: native-control component playground
+- `src/components/studio-board.tsx`: lightweight CSS perspective composition
+- `src/components/screen-explorer.tsx`: shared interactive project-image viewer
 - `src/lib/seo.ts`: localized canonical, language alternates, social metadata, and production origin
 - `public/projects`: genuine Figma exports, served locally and optimized with `next/image`
 - `public/fonts`: self-hosted fonts; no runtime requests to Google Fonts
@@ -82,3 +86,9 @@ No secret environment variables are needed. A `.env.example` documents the optio
 See `docs/content-provenance.md` for details.
 
 Verification results, build notes, and the development-only dependency advisory are recorded in [docs/verification.md](docs/verification.md). To run the route smoke check against a running server, use `npm run check:routes`.
+
+## Redesign interactions
+
+The composition board responds to mouse movement and has a keyboard-operable rearrange control. The Design Lab changes component appearance, density, button variant, width, selection, and saved state. These are explicitly labeled portfolio demonstrations, not client projects. Learnify's screen explorer switches among the original exports; the full-resolution gallery remains available. All interactive copy is localized, and motion respects reduced-motion settings. No additional dependencies or WebGL runtime were introduced.
+
+The creative audit and reference-access limits are documented in [docs/redesign-direction.md](docs/redesign-direction.md).

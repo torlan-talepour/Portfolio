@@ -1,140 +1,225 @@
+import Link from "next/link";
 import { messages } from "@/data/messages";
+import { studio } from "@/data/studio";
 import { person, projects, skills, type Locale } from "@/data/portfolio";
-import { Arrow, Spark } from "./icon";
-import { ProjectCard } from "./project-card";
+import { Arrow } from "./icon";
+import { StudioBoard } from "./studio-board";
+import { DesignLab } from "./design-lab";
+import { ScreenExplorer } from "./screen-explorer";
 export function Home({ locale }: { locale: Locale }) {
   const m = messages[locale];
+  const s = studio[locale];
   return (
-    <main tabIndex={-1} id="main">
-      <section className="hero container" aria-labelledby="hero-title">
-        <div className="hero-top">
-          <p className="eyebrow">
-            <span className="status-dot" />
-            {m.hero.eyebrow}
-          </p>
-          <span className="hero-name mono">{person.name[locale]}</span>
+    <main id="main" tabIndex={-1}>
+      <section className="studio-hero container" aria-labelledby="hero-title">
+        <div className="studio-intro-line">
+          <span className="eyebrow">
+            <i className="status-dot" />
+            {person.role[locale]}
+          </span>
+          <span className="eyebrow">{s.edition}</span>
         </div>
-        <div className="hero-composition">
-          <h1 id="hero-title">
-            <span>{m.hero.line1}</span>
-            <span className="hero-second">{m.hero.line2}</span>
-          </h1>
-          <div className="hero-art" aria-hidden="true">
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="orbit orbit-three" />
-            <div className="art-core">
-              <Spark />
-            </div>
-            <span className="art-coordinate">35° / DESIGN EXPLORATION</span>
-            <span className="art-point point-one" />
-            <span className="art-point point-two" />
-          </div>
-        </div>
-        <div className="hero-bottom">
-          <div className="hero-intro">
-            <p>{m.hero.intro}</p>
+        <h1 id="hero-title" className="designer-name">
+          <span>{locale === "en" ? "Torlan" : "طرلان"}</span>{" "}
+          <span className="name-last">
+            {locale === "en" ? "Talepour" : "طالع پور"}
+            <span className="name-period" aria-hidden="true">
+              .
+            </span>
+          </span>
+        </h1>
+        <div className="hero-studio-grid">
+          <div className="studio-position">
+            <p className="eyebrow">{s.studio}</p>
+            <h2>
+              {s.heroLead}
+              <br />
+              <em>{s.heroAccent}</em>
+            </h2>
+            <p className="studio-bio">{s.heroBody}</p>
             <div className="hero-ctas">
               <a className="button button-dark" href="#work">
-                {m.hero.work}
+                {s.work}
                 <Arrow />
               </a>
-              <a className="text-link" href={`mailto:${person.email}`}>
-                {m.hero.contact}
+              <a className="text-link" href="#lab">
+                {s.labLink}
                 <Arrow diagonal />
               </a>
             </div>
+            <div className="principle-list">
+              {s.principles.map((p, i) => (
+                <span key={p}>
+                  <small>0{i + 1}</small>
+                  {p}
+                </span>
+              ))}
+            </div>
           </div>
-          <p className="hero-note">
-            {m.hero.note}
-            <span className="hand-line" aria-hidden="true" />
-          </p>
+          <StudioBoard locale={locale} />
         </div>
-        <a href="#work" className="scroll-cue">
-          <span className="scroll-icon" aria-hidden="true">
-            ↓
-          </span>
-          <span>{m.hero.scroll}</span>
-        </a>
+        <div className="hero-baseline">
+          <span className="eyebrow">{s.boardNote}</span>
+          <a href="#work">
+            {s.scroll}
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
       </section>
       <section
+        className="selected-work section container"
         id="work"
-        className="work section container"
         aria-labelledby="work-title"
       >
-        <div className="section-intro">
+        <div className="work-intro reveal-element">
           <p className="eyebrow">{m.work.eyebrow}</p>
-          <div className="section-heading-row">
-            <h2 id="work-title" className="section-title">
-              {m.work.title}
-            </h2>
-            <p>{m.work.intro}</p>
-          </div>
+          <h2 className="section-title" id="work-title">
+            {s.workTitle}
+          </h2>
+          <p>{s.workNote}</p>
         </div>
-        <div className="project-list">
-          {projects.map((p, i) => (
-            <ProjectCard key={p.slug} project={p} locale={locale} index={i} />
-          ))}
+        <div className="folio-list">
+          {projects.map((project, i) =>
+            project.images.length > 0 ? (
+              <article
+                className="learnify-folio reveal-element"
+                key={project.slug}
+              >
+                <div className="folio-title-row">
+                  <div>
+                    <p className="eyebrow">
+                      {i === 0 ? s.learnifyLabel : project.category[locale]}
+                    </p>
+                    <h3>
+                      <Link href={`/${locale}/projects/${project.slug}`}>
+                        {project.title[locale]}
+                        <Arrow diagonal />
+                      </Link>
+                    </h3>
+                  </div>
+                  <p>{s.learnifyHeadline}</p>
+                </div>
+                <ScreenExplorer images={project.images} locale={locale} />
+                <div className="folio-description">
+                  <p>{project.short[locale]}</p>
+                  <div className="project-links">
+                    <Link
+                      className="text-link"
+                      href={`/${locale}/projects/${project.slug}`}
+                    >
+                      {s.caseStudy}
+                      <Arrow />
+                    </Link>
+                    <a
+                      href={project.link}
+                      className="subtle-link"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {s.source}
+                      <Arrow diagonal />
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ) : (
+              <article
+                className="prototype-folio reveal-element"
+                key={project.slug}
+              >
+                <div className="prototype-title">
+                  <p className="eyebrow">{s.crmLabel}</p>
+                  <h3>{project.title[locale]}</h3>
+                  <p>{s.crmHeadline}</p>
+                </div>
+                <div className="prototype-object">
+                  <span className="eyebrow">{s.crmStatus}</span>
+                  <div className="prototype-symbol" aria-hidden="true">
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                  <a
+                    href={project.link}
+                    className="prototype-launch"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {s.prototype}
+                    <Arrow diagonal />
+                  </a>
+                  <p>{s.crmMedia}</p>
+                </div>
+                <div className="prototype-description">
+                  <p>{s.crmNote}</p>
+                  <Link
+                    className="text-link"
+                    href={`/${locale}/projects/${project.slug}`}
+                  >
+                    {s.caseStudy}
+                    <Arrow />
+                  </Link>
+                </div>
+              </article>
+            ),
+          )}
         </div>
       </section>
+      <DesignLab locale={locale} />
       <section
+        className="studio-about section container"
         id="about"
-        className="about section"
         aria-labelledby="about-title"
       >
-        <div className="container about-layout">
-          <div className="about-identity">
-            <p className="eyebrow">{m.about.eyebrow}</p>
-            <div className="identity-art" aria-hidden="true">
-              <span className="identity-cross cross-one">+</span>
-              <span className="identity-cross cross-two">+</span>
-              <div className="identity-disc">
-                <span>{m.about.monogram}</span>
-                <Spark />
-              </div>
-              <span className="identity-coordinate mono">
-                FIG. 01 — A WORK IN PROGRESS
-              </span>
-            </div>
-            <p className="identity-caption">{m.about.caption}</p>
+        <div className="about-margin">
+          <p className="eyebrow">{s.aboutEyebrow}</p>
+          <div className="about-stamp" aria-hidden="true">
+            <span>
+              tt<span>·</span>
+            </span>
+            <small>{s.principles.join(" / ")}</small>
           </div>
-          <div className="about-copy">
-            <h2 id="about-title" className="section-title">
-              {m.about.title}
-            </h2>
-            <p className="about-lead">{m.about.lead}</p>
-            <p>{m.about.body}</p>
-            <p>{m.about.body2}</p>
-            <div className="about-note">
-              <span className="status-dot" />
-              {m.about.note}
-            </div>
-          </div>
+          <p className="margin-note">{s.aboutSide}</p>
+        </div>
+        <div className="about-editorial reveal-element">
+          <p className="eyebrow">{s.aboutIndex}</p>
+          <h2 className="section-title" id="about-title">
+            {s.aboutTitle}
+          </h2>
+          <p className="about-lead">{m.about.lead}</p>
+          <p>{m.about.body}</p>
+          <p>{m.about.body2}</p>
+          <span className="about-signature">
+            {person.name[locale]}
+            <i aria-hidden="true">↗</i>
+          </span>
         </div>
       </section>
       <section
+        className="studio-expertise container"
         id="skills"
-        className="expertise section container"
         aria-labelledby="skills-title"
       >
-        <p className="eyebrow">{m.skills.eyebrow}</p>
-        <div className="section-heading-row">
-          <h2 id="skills-title" className="section-title">
-            {m.skills.title}
-          </h2>
-          <p>{m.skills.intro}</p>
+        <div className="expertise-heading">
+          <p className="eyebrow">{s.skillsEyebrow}</p>
+          <h2 id="skills-title">{m.skills.title.replace("\n", " ")}</h2>
         </div>
-        <div className="skill-grid">
+        <div className="expertise-list">
           {skills.map((skill, i) => (
-            <article className="skill-column" key={skill.title.en}>
-              <div className="skill-top">
-                <span className="mono">0{i + 1}</span>
-                <span className="skill-glyph" aria-hidden="true">
-                  {["↗", "⊞", "✳"][i]}
-                </span>
+            <article
+              className="expertise-row reveal-element"
+              key={skill.title.en}
+            >
+              <span className="mono">
+                {(i + 1).toLocaleString(locale === "fa" ? "fa-IR" : "en-US", {
+                  minimumIntegerDigits: 2,
+                })}
+              </span>
+              <div>
+                <h3>{skill.title[locale]}</h3>
+                <p>{skill.description[locale]}</p>
               </div>
-              <h3>{skill.title[locale]}</h3>
-              <p>{skill.description[locale]}</p>
               <ul>
                 {skill.items[locale].map((item) => (
                   <li key={item}>{item}</li>

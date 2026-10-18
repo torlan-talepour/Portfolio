@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { isLocale, projects } from "@/data/portfolio";
 import { messages } from "@/data/messages";
 import { pageMetadata } from "@/lib/seo";
-import { ProjectMedia } from "@/components/project-media";
+import { ScreenExplorer } from "@/components/screen-explorer";
+import { studio } from "@/data/studio";
 import { Arrow } from "@/components/icon";
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -36,6 +37,7 @@ export default async function ProjectPage({
 }) {
   const { locale, project } = await getProject(params);
   const m = messages[locale].project;
+  const s = studio[locale];
   const next = projects[(projects.indexOf(project) + 1) % projects.length];
   return (
     <main tabIndex={-1} id="main" className="case-page">
@@ -51,9 +53,51 @@ export default async function ProjectPage({
           </div>
           <p>{project.short[locale]}</p>
         </div>
-        <ProjectMedia project={project} locale={locale} priority />
+        <nav className="case-index" aria-label={s.contents}>
+          <a href="#overview">
+            {s.readProject}
+            <span aria-hidden="true">↓</span>
+          </a>
+          {project.images.length > 0 && (
+            <a href="#screens">
+              {s.allScreens}
+              <span aria-hidden="true">↓</span>
+            </a>
+          )}
+          <a href={project.link} target="_blank" rel="noreferrer">
+            {s.original}
+            <Arrow diagonal />
+          </a>
+        </nav>
+        {project.images.length > 0 ? (
+          <div className="case-opening-visual">
+            <ScreenExplorer images={project.images} locale={locale} detail />
+          </div>
+        ) : (
+          <div className="case-prototype-opening">
+            <span className="case-crm-type" aria-hidden="true">
+              CRM<span>↗</span>
+            </span>
+            <div>
+              <p className="eyebrow">{s.crmStatus}</p>
+              <p>{s.crmMedia}</p>
+              <a
+                className="button button-dark"
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {s.prototype}
+                <Arrow diagonal />
+              </a>
+            </div>
+          </div>
+        )}
       </section>
-      <section className="case-overview section container">
+      <section
+        id="overview"
+        className="case-overview section container reveal-element"
+      >
         <p className="eyebrow">{m.summary}</p>
         <div className="case-overview-grid">
           <h2 className="section-title">{m.overview}</h2>
@@ -82,7 +126,7 @@ export default async function ProjectPage({
         </div>
       </section>
       {project.sections.length > 0 && (
-        <section className="case-observations container">
+        <section className="case-observations container reveal-element">
           {project.sections.map((s, i) => (
             <article key={s.title.en}>
               <span className="mono">0{i + 1}</span>
@@ -94,6 +138,7 @@ export default async function ProjectPage({
       )}
       {project.images.length > 0 ? (
         <section
+          id="screens"
           className="case-gallery section container"
           aria-labelledby="screens-heading"
         >

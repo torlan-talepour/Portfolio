@@ -1,3 +1,4 @@
+import { MotionObserver } from "@/components/motion-observer";
 import { siteUrl } from "@/lib/seo";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
@@ -19,7 +20,11 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   return (
-    <html data-scroll-behavior="smooth" lang={locale} dir={locale === "fa" ? "rtl" : "ltr"}>
+    <html
+      data-scroll-behavior="smooth"
+      lang={locale}
+      dir={locale === "fa" ? "rtl" : "ltr"}
+    >
       <head>
         <link
           rel="preload"
@@ -37,6 +42,7 @@ export default async function LocaleLayout({
         <Header locale={locale} />
         {children}
         <Footer locale={locale} />
+        <MotionObserver />
       </body>
     </html>
   );

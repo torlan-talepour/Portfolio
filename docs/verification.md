@@ -43,3 +43,22 @@ No claim of a formal WCAG audit, real-device testing, or user research is made. 
 The build emits Next.js's metadataBase fallback warning while generating its shared metadata. The six public pages explicitly set metadataBase, canonical URLs, language alternates, and social metadata; the origin is controlled by SITE_URL / Vercel's production URL. Set the final origin before launching. A browser extension added `cz-shortcut-listen` to the body during development and caused an extension-originated hydration attribute warning; the application does not add that attribute or suppress hydration diagnostics.
 
 The source Figma Make project currently reports a broken code layer and an empty preview. The external link is preserved exactly, but working upstream prototype behavior cannot be guaranteed from the supplied resource.
+
+## Interactive studio redesign — latest validation
+
+This section records the redesigned version and supersedes the original visual review above.
+
+- Production build: passed, with all six original localized routes retained.
+- ESLint: passed without errors or warnings. Standalone TypeScript and the build's TypeScript check passed.
+- Production route smoke check: **92 assertions passed**, including the corrected Persian name, removal of its obsolete spelling, lab controls, metadata, actual image responses, language links, and 404s.
+- Browser viewport matrix: `/en` and `/fa` at **1440px**, **768px**, and **390px**. All six measurements had `documentElement.scrollWidth === innerWidth`. Screenshots are in `docs/redesign-previews/`.
+- Both Learnify and CRM detail layouts were reviewed, including mobile and language switching preserving the project slug.
+- Verified composition-state toggle, all four lab selects, selected state, saved-state keyboard activation, reset defaults, mobile-menu Escape handling, Learnify screen selection, and successful Persian copy-email status.
+- The image-scroll container remounts when switching exports so the newly selected screen starts at the top.
+- Browser console collection returned no error or warning entries during the final production review.
+- Fixed the first desktop name overflow, compact-preview artwork spacing, and a small caption contrast issue during visual iteration. Checked representative text pairs with calculated contrast ratios; this is not a full accessibility audit.
+- Reduced-motion CSS disables entrance/reveal/state transitions and perspective motion. Pointer handling and reveal observation check the system preference. Runtime preference emulation was not exposed by the browser tool, so that path was reviewed in code rather than claimed as an emulated browser test.
+- No dependencies were added. No WebGL, animation library, continuous render loop, or third-party assets were introduced. No Lighthouse/Core Web Vitals score or real-device performance result is claimed.
+- The existing shared-metadata fallback warning remains documented above. Public page metadata remains explicit and the deployment-origin configuration is unchanged.
+
+CRM exports and confirmed role/process notes remain outstanding. The studio board, component playground, and prototype folio artwork are original, clearly bounded portfolio presentation/demo elements and are not represented as project screenshots.

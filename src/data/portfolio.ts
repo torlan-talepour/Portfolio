@@ -4,7 +4,7 @@ export type Localized<T = string> = Record<Locale, T>;
 export const isLocale = (value: string): value is Locale =>
   locales.includes(value as Locale);
 export const person = {
-  name: { en: "Torlan Talepour", fa: "تورلان طالب‌پور" },
+  name: { en: "Torlan Talepour", fa: "طرلان طالع پور" },
   email: "torlan.1994@gmail.com",
   role: { en: "UI/UX Designer", fa: "طراح رابط و تجربه کاربری" },
 };

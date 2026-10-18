@@ -2,7 +2,7 @@
 
 ## Designer
 
-The supplied brief is the only source for Torlan's background, skills, title, and contact information. No employers, clients, years of experience, commercial outcomes, credentials, or testimonials are claimed. Persian name spelling follows the transliteration تورلان طالب‌پور and may be edited by the owner.
+The supplied brief is the only source for Torlan's background, skills, title, and contact information. No employers, clients, years of experience, commercial outcomes, credentials, or testimonials are claimed. The owner explicitly confirmed the Persian name spelling طرلان طالع پور.
 
 ## Learnify
 

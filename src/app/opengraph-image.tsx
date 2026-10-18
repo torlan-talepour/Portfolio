@@ -6,40 +6,52 @@ export default function OG() {
   return new ImageResponse(
     <div
       style={{
-        height: "100%",
         width: "100%",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        background: "#f6f5f0",
-        padding: "70px",
-        color: "#20231f",
+        padding: "55px 65px",
+        background: "#f5f3ed",
+        color: "#17191c",
       }}
     >
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
-          fontSize: 24,
+          fontSize: 18,
+          letterSpacing: 2,
         }}
       >
-        <span>torlan talepour</span>
-        <span style={{ color: "#244bda" }}>UI/UX DESIGNER</span>
+        <span>UI/UX DESIGNER</span>
+        <span>SELECTED EXPLORATIONS</span>
       </div>
       <div
         style={{
           display: "flex",
           flexDirection: "column",
-          fontSize: 76,
-          letterSpacing: -4,
-          lineHeight: 1.1,
+          fontSize: 130,
+          letterSpacing: -9,
+          lineHeight: 1.02,
         }}
       >
-        <span>Thoughtful design.</span>
-        <span style={{ color: "#244bda" }}>Human experiences.</span>
+        <span>Torlan</span>
+        <span style={{ color: "#3656e8", paddingLeft: 150 }}>Talepour.</span>
       </div>
-      <div style={{ display: "flex", fontSize: 22 }}>
-        Web & mobile interfaces · Selected work
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          fontSize: 19,
+          borderTop: "1px solid #d5d5ce",
+          paddingTop: 23,
+        }}
+      >
+        <span>Curiosity. Craft. Clarity.</span>
+        <span style={{ background: "#ddf58a", padding: "3px 12px" }}>
+          A personal design space ↗
+        </span>
       </div>
     </div>,
     size,

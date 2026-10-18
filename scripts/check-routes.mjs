@@ -42,6 +42,26 @@ for (const locale of ["en", "fa"]) {
       html.includes(`href="${switchPath}"`),
       `${path}: language switch loses route`,
     );
+    if (locale === "fa") {
+      check(
+        html.includes("طرلان طالع پور"),
+        `${path}: corrected Persian name missing`,
+      );
+      check(
+        !html.includes("تورلان"),
+        `${path}: obsolete Persian spelling remains`,
+      );
+    }
+    if (!suffix) {
+      check(
+        html.includes('id="lab"'),
+        `${path}: missing interactive design lab`,
+      );
+      check(
+        html.includes('id="lab-appearance"'),
+        `${path}: missing lab controls`,
+      );
+    }
     const imgs = [...html.matchAll(/<img\b[^>]*src="([^\"]+)"/g)].map((m) =>
       m[1].replaceAll("&amp;", "&"),
     );

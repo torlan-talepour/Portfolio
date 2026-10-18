@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { messages } from "@/data/messages";
-import type { Locale } from "@/data/portfolio";
+import { person, type Locale } from "@/data/portfolio";
 export function Header({ locale }: { locale: Locale }) {
   const [open, setOpen] = useState(false);
   const path = usePathname();
@@ -47,15 +47,13 @@ export function Header({ locale }: { locale: Locale }) {
             aria-label={
               locale === "en"
                 ? "Torlan Talepour — Home"
-                : "تورلان طالب‌پور — خانه"
+                : "طرلان طالع پور — خانه"
             }
           >
             <span className="brand-symbol" aria-hidden="true">
-              t<span>.</span>
+              tt<span>·</span>
             </span>
-            <span>
-              {locale === "en" ? "torlan talepour" : "تورلان طالب‌پور"}
-            </span>
+            <span>{person.name[locale]}</span>
           </Link>
           <nav
             className="desktop-nav"
