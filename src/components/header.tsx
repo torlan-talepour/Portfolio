@@ -1,0 +1,121 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { messages } from "@/data/messages";
+import type { Locale } from "@/data/portfolio";
+export function Header({ locale }: { locale: Locale }) {
+  const [open, setOpen] = useState(false);
+  const path = usePathname();
+  const m = messages[locale];
+  const other = locale === "en" ? "fa" : "en";
+  const target = path.replace(/^\/(en|fa)(?=\/|$)/, `/${other}`);
+  const button = useRef<HTMLButtonElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    function dismiss(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setOpen(false);
+        button.current?.focus();
+      }
+    }
+    function outside(e: PointerEvent) {
+      if (
+        !panel.current?.contains(e.target as Node) &&
+        !button.current?.contains(e.target as Node)
+      )
+        setOpen(false);
+    }
+    document.addEventListener("keydown", dismiss);
+    document.addEventListener("pointerdown", outside);
+    return () => {
+      document.removeEventListener("keydown", dismiss);
+      document.removeEventListener("pointerdown", outside);
+    };
+  }, [open]);
+  return (
+    <>
+      <a className="skip-link" href="#main">
+        {m.skip}
+      </a>
+      <header className="header" id="top">
+        <div className="header-inner">
+          <Link
+            className="wordmark"
+            href={`/${locale}`}
+            aria-label={
+              locale === "en"
+                ? "Torlan Talepour — Home"
+                : "تورلان طالب‌پور — خانه"
+            }
+          >
+            <span className="brand-symbol" aria-hidden="true">
+              t<span>.</span>
+            </span>
+            <span>
+              {locale === "en" ? "torlan talepour" : "تورلان طالب‌پور"}
+            </span>
+          </Link>
+          <nav
+            className="desktop-nav"
+            aria-label={locale === "en" ? "Main navigation" : "ناوبری اصلی"}
+          >
+            {Object.entries(m.nav).map(([key, label]) => (
+              <Link href={`/${locale}#${key}`} key={key}>
+                {label}
+              </Link>
+            ))}
+          </nav>
+          <div className="header-actions">
+            <Link
+              className="language"
+              href={target}
+              hrefLang={other}
+              lang={other}
+              aria-label={m.language}
+              onClick={() => setOpen(false)}
+            >
+              {" "}
+              <span className={locale === "en" ? "active" : ""}>EN</span>
+              <span className="language-divider" />
+              <span className={locale === "fa" ? "active" : ""}>فا</span>
+            </Link>
+            <button
+              ref={button}
+              className={`menu-toggle ${open ? "is-open" : ""}`}
+              aria-label={open ? m.closeMenu : m.menu}
+              aria-expanded={open}
+              aria-controls="mobile-navigation"
+              onClick={() => setOpen(!open)}
+            >
+              <span />
+              <span />
+            </button>
+          </div>
+        </div>
+        <div
+          ref={panel}
+          id="mobile-navigation"
+          className="mobile-menu"
+          hidden={!open}
+        >
+          <nav aria-label={m.menu}>
+            {Object.entries(m.nav).map(([key, label], i) => (
+              <Link
+                key={key}
+                href={`/${locale}#${key}`}
+                onClick={() => setOpen(false)}
+              >
+                <span className="mono" aria-hidden="true">
+                  0{i + 1}
+                </span>
+                {label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </header>
+    </>
+  );
+}

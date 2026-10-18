@@ -1,0 +1,181 @@
+import type { Locale } from "./portfolio";
+const en = {
+  nav: {
+    about: "About",
+    work: "Selected work",
+    skills: "Expertise",
+    contact: "Contact",
+  },
+  menu: "Open navigation",
+  closeMenu: "Close navigation",
+  language: "Switch to Persian",
+  skip: "Skip to content",
+  hero: {
+    eyebrow: "UI/UX DESIGNER",
+    line1: "Thoughtful design.",
+    line2: "Human experiences.",
+    intro:
+      "I’m Torlan, a UI/UX designer shaping clear, considered interfaces for web and mobile.",
+    work: "Explore my work",
+    contact: "Get in touch",
+    note: "Curious by nature. Intentional by design.",
+    scroll: "Scroll to explore",
+  },
+  work: {
+    eyebrow: "01 / SELECTED WORK",
+    title: "Ideas, made tangible.",
+    intro:
+      "A selection of interfaces and prototypes. Different contexts, the same attention to detail.",
+    case: "View case study",
+    source: "Open in Figma",
+    prototype: "Explore prototype",
+    pending: "Project preview unavailable",
+    pendingDetail: "Original screen exports are not available yet.",
+    count: "TWO SELECTED PROJECTS",
+    sourceImage: "Original Figma design",
+  },
+  about: {
+    eyebrow: "02 / A LITTLE ABOUT ME",
+    title: "A curious mind.\nA considered approach.",
+    lead: "I enjoy the space where a useful idea becomes an intuitive experience.",
+    body: "I’m Torlan Talepour, a UI/UX designer working on web and mobile interfaces. My experience spans responsive layouts, multi-page experiences, reusable Figma components, and interactive prototypes.",
+    body2:
+      "I like working through design challenges, exploring different directions, and refining the details that make an interface feel clear. I also use AI-assisted tools to explore concepts and prototype ideas as I continue developing my craft.",
+    note: "Always exploring. Always learning.",
+    monogram: "TT",
+    caption: "TORLAN TALEPOUR / UI/UX DESIGNER",
+  },
+  skills: {
+    eyebrow: "03 / EXPERTISE & TOOLS",
+    title: "From first idea\nto the finer details.",
+    intro:
+      "A practical toolkit for exploring, designing, and connecting experiences.",
+  },
+  contact: {
+    eyebrow: "04 / LET’S CONNECT",
+    title: "Good things start\nwith a conversation.",
+    body: "Have a design opportunity or an interesting challenge? I’d love to hear about it.",
+    email: "Send an email",
+    copy: "Copy email",
+    copied: "Email copied",
+    failed: "Couldn’t copy. Please select the email address.",
+    back: "Back to top",
+    footer: "Designed with care, down to the details.",
+    rights: "Torlan Talepour",
+  },
+  project: {
+    back: "All projects",
+    overview: "The project at a glance",
+    tool: "Tool",
+    type: "Format",
+    scope: "Project",
+    screens: "A closer look",
+    screensIntro:
+      "Selected screens, exported directly from the original Figma file.",
+    source: "Explore the original",
+    sourceText: "See the project in its original context.",
+    next: "NEXT PROJECT",
+    view: "View full-size image",
+    embed: "Interactive prototype",
+    open: "Open original project",
+    pending: "Screens coming soon",
+    pendingText:
+      "Original project screenshots have not been supplied yet. Explore the Figma Make prototype using the link below.",
+    summary: "PROJECT OVERVIEW",
+  },
+  seo: {
+    title: "Torlan Talepour — UI/UX Designer",
+    description:
+      "Selected web and mobile interface designs by Torlan Talepour. Explore Learnify, a CRM prototype, and a thoughtful approach to UI/UX design.",
+  },
+};
+type Messages = typeof en;
+const fa: Messages = {
+  nav: {
+    about: "درباره من",
+    work: "پروژه‌های منتخب",
+    skills: "مهارت‌ها",
+    contact: "تماس",
+  },
+  menu: "بازکردن منو",
+  closeMenu: "بستن منو",
+  language: "Switch to English",
+  skip: "رفتن به محتوای اصلی",
+  hero: {
+    eyebrow: "طراح رابط و تجربه کاربری",
+    line1: "طراحی سنجیده.",
+    line2: "تجربه‌ای انسانی.",
+    intro:
+      "من تورلان هستم؛ طراح رابط و تجربه کاربری، با تمرکز بر رابط‌های روشن و سنجیده برای وب و موبایل.",
+    work: "دیدن پروژه‌ها",
+    contact: "در تماس باشیم",
+    note: "با ذهنی کنجکاو، با نگاهی هدفمند.",
+    scroll: "برای دیدن ادامه، پایین بروید",
+  },
+  work: {
+    eyebrow: "۰۱ / پروژه‌های منتخب",
+    title: "ایده‌هایی که شکل گرفته‌اند.",
+    intro:
+      "منتخبی از رابط‌ها و پروتوتایپ‌ها؛ در زمینه‌های متفاوت، با توجه یکسان به جزئیات.",
+    case: "مشاهده پروژه",
+    source: "بازکردن در فیگما",
+    prototype: "بررسی پروتوتایپ",
+    pending: "پیش‌نمایش پروژه در دسترس نیست",
+    pendingDetail: "خروجی اصلی صفحات هنوز در دسترس نیست.",
+    count: "دو پروژه منتخب",
+    sourceImage: "طراحی اصلی در فیگما",
+  },
+  about: {
+    eyebrow: "۰۲ / کمی درباره من",
+    title: "ذهنی کنجکاو.\nرویکردی سنجیده.",
+    lead: "برای من، جذابیت طراحی جایی است که یک ایده کاربردی به تجربه‌ای ساده و قابل‌فهم تبدیل می‌شود.",
+    body: "من تورلان طالب‌پور هستم، طراح رابط و تجربه کاربری وب و موبایل. تجربه من شامل طراحی چیدمان‌های واکنش‌گرا، تجربه‌های چندصفحه‌ای، کامپوننت‌های قابل‌استفاده مجدد در فیگما و پروتوتایپ‌های تعاملی است.",
+    body2:
+      "از حل چالش‌های طراحی، بررسی مسیرهای مختلف و پرداختن به جزئیاتی که رابط را روشن‌تر می‌کنند، لذت می‌برم. در مسیر یادگیری و بهبود مهارت‌هایم، از ابزارهای هوش مصنوعی هم برای کاوش مفاهیم و ساخت پروتوتایپ استفاده می‌کنم.",
+    note: "همیشه در حال کشف، همیشه در حال یادگیری.",
+    monogram: "ت‌ط",
+    caption: "تورلان طالب‌پور / طراح رابط و تجربه کاربری",
+  },
+  skills: {
+    eyebrow: "۰۳ / مهارت‌ها و ابزارها",
+    title: "از اولین ایده\nتا ظریف‌ترین جزئیات.",
+    intro: "مجموعه‌ای کاربردی از ابزارها برای کاوش، طراحی و پیوند تجربه‌ها.",
+  },
+  contact: {
+    eyebrow: "۰۴ / در تماس باشیم",
+    title: "شروع یک اتفاق خوب،\nیک گفت‌وگوست.",
+    body: "فرصت همکاری در طراحی یا چالشی جالب دارید؟ خوشحال می‌شوم درباره‌اش بشنوم.",
+    email: "ارسال ایمیل",
+    copy: "کپی ایمیل",
+    copied: "ایمیل کپی شد",
+    failed: "کپی نشد. لطفاً آدرس ایمیل را انتخاب کنید.",
+    back: "بازگشت به بالا",
+    footer: "طراحی‌شده با دقت، تا آخرین جزئیات.",
+    rights: "تورلان طالب‌پور",
+  },
+  project: {
+    back: "همه پروژه‌ها",
+    overview: "نگاهی به پروژه",
+    tool: "ابزار",
+    type: "قالب",
+    scope: "پروژه",
+    screens: "نگاهی نزدیک‌تر",
+    screensIntro: "منتخبی از صفحات، با خروجی مستقیم از فایل اصلی فیگما.",
+    source: "بررسی پروژه اصلی",
+    sourceText: "پروژه را در فضای اصلی آن ببینید.",
+    next: "پروژه بعدی",
+    view: "مشاهده تصویر در اندازه کامل",
+    embed: "پروتوتایپ تعاملی",
+    open: "بازکردن پروژه اصلی",
+    pending: "تصاویر به‌زودی",
+    pendingText:
+      "تصاویر اصلی این پروژه هنوز ارائه نشده‌اند. می‌توانید پروتوتایپ فیگما میک را از لینک زیر بررسی کنید.",
+    summary: "معرفی پروژه",
+  },
+  seo: {
+    title: "تورلان طالب‌پور — طراح رابط و تجربه کاربری",
+    description:
+      "منتخبی از طراحی‌های رابط وب و موبایل تورلان طالب‌پور؛ پروژه لرنیفای، پروتوتایپ CRM و رویکردی سنجیده به طراحی رابط و تجربه کاربری.",
+  },
+};
+export const messages: Record<Locale, Messages> = { en, fa };
