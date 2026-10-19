@@ -187,16 +187,9 @@ html[lang="fa"] .eyebrow {
   white-space: nowrap;
 }
 .brand-symbol {
-  font-family: Inter, Arial, sans-serif;
-  font-size: 37px;
-  letter-spacing: -0.16em;
-  line-height: 1;
-  direction: ltr;
-  font-weight: 850;
-}
-.brand-symbol > span {
-  color: var(--accent);
-  letter-spacing: -0.1em;
+  width: 36px;
+  height: 36px;
+  flex: none;
 }
 .desktop-nav {
   display: flex;
@@ -227,17 +220,28 @@ html[lang="fa"] .eyebrow {
 .language {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 2px;
   font-size: 11px;
   direction: ltr;
   color: var(--muted);
 }
-.language .active {
-  color: var(--ink);
+.language a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 8px;
+  transition: color .2s, background .2s;
 }
-.language-divider {
-  height: 12px;
-  border-inline-start: 1px solid var(--line);
+.language a:hover {
+  color: var(--ink);
+  background: var(--surface);
+}
+.language a[aria-current="true"] {
+  color: var(--accent);
+  background: var(--surface);
+  box-shadow: inset 0 -2px var(--accent);
 }
 .menu-toggle {
   display: none;
@@ -429,18 +433,13 @@ html[lang="fa"] .eyebrow {
   border-color: var(--accent);
   transform: rotate(6deg);
 }
-.tt-sculpture {
-  font-family: Inter, Arial, sans-serif;
+.hero-brand-mark {
   display: block;
-  font-size: 150px;
-  line-height: 1.1;
-  letter-spacing: -0.17em;
-  font-weight: 850;
+  margin-inline: auto;
+  width: 148px;
+  height: 148px;
   color: var(--accent);
-  text-align: center;
-}
-.tt-sculpture > span {
-  color: var(--ink);
+  filter: drop-shadow(8px 12px 0 rgba(0, 0, 0, .16));
 }
 .plane-baseline {
   margin-block-start: 7px;
@@ -1217,8 +1216,9 @@ html[lang="fa"] .eyebrow {
   .board-stage {
     height: 225px;
   }
-  .tt-sculpture {
-    font-size: 120px;
+  .hero-brand-mark {
+    width: 120px;
+    height: 120px;
   }
   .plane-main {
     inset: 27px 20px 3px 35px;
@@ -1280,7 +1280,8 @@ html[lang="fa"] .eyebrow {
     gap: 10px;
   }
   .brand-symbol {
-    font-size: 32px;
+    width: 30px;
+    height: 30px;
   }
   .desktop-nav {
     display: none;
@@ -1566,7 +1567,7 @@ html[lang="fa"] .eyebrow {
     gap: 7px;
   }
   .wordmark > span:last-child {
-    font-size: 10px;
+    display: none;
   }
   .hero-art {
     width: calc(100% - 12px);

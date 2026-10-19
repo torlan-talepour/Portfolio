@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { BrandMark } from "@/components/brand-mark";
 import { studio } from "@/data/studio";
 import type { Locale } from "@/data/portfolio";
 export function StudioBoard({ locale }: { locale: Locale }) {
@@ -64,9 +65,7 @@ export function StudioBoard({ locale }: { locale: Locale }) {
           <span className="selection-handle handle-c" />
           <span className="selection-handle handle-d" />
           <span className="plane-label">{m.align} / 02</span>
-          <span className="tt-sculpture">
-            tt<span>·</span>
-          </span>
+          <BrandMark className="hero-brand-mark" />
           <div className="plane-baseline" />
         </div>
         <div className="board-plane plane-front">
@@ -88,7 +87,7 @@ export function StudioBoard({ locale }: { locale: Locale }) {
               strokeWidth="1.5"
             />
           </svg>
-          <span>{locale === "fa" ? "طرلان" : "Torlan"}</span>
+          <span>{locale === "fa" ? "در حال طراحی" : "Work in progress"}</span>
         </div>
       </div>
       <div className="board-controls">

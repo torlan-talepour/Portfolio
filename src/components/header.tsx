@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { BrandMark } from "@/components/brand-mark";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { messages } from "@/data/messages";
@@ -10,8 +11,6 @@ export function Header({ locale }: { locale: Locale }) {
   const m = messages[locale];
   const segment = path.split("/")[2] || "home";
   const activePage = segment === "projects" ? "portfolio" : segment;
-  const other = locale === "en" ? "fa" : "en";
-  const target = path.replace(/^\/(en|fa)(?=\/|$)/, `/${other}`);
   const button = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -52,9 +51,7 @@ export function Header({ locale }: { locale: Locale }) {
                 : "طرلان طالع پور — خانه"
             }
           >
-            <span className="brand-symbol" aria-hidden="true">
-              tt<span>·</span>
-            </span>
+            <BrandMark />
             <span>{person.name[locale]}</span>
           </Link>
           <nav
@@ -72,19 +69,21 @@ export function Header({ locale }: { locale: Locale }) {
             ))}
           </nav>
           <div className="header-actions">
-            <Link
-              className="language"
-              href={target}
-              hrefLang={other}
-              lang={other}
-              aria-label={m.language}
-              onClick={() => setOpen(false)}
-            >
-              {" "}
-              <span className={locale === "en" ? "active" : ""}>EN</span>
-              <span className="language-divider" />
-              <span className={locale === "fa" ? "active" : ""}>فا</span>
-            </Link>
+            <nav className="language" aria-label={locale === "en" ? "Language" : "زبان"}>
+              {(["en", "fa"] as const).map((language) => (
+                <Link
+                  key={language}
+                  href={path.replace(/^\/(en|fa)(?=\/|$)/, `/${language}`)}
+                  hrefLang={language}
+                  lang={language}
+                  aria-label={language === "en" ? "English" : "فارسی"}
+                  aria-current={locale === language ? "true" : undefined}
+                  onClick={() => setOpen(false)}
+                >
+                  {language === "en" ? "EN" : "فا"}
+                </Link>
+              ))}
+            </nav>
             <button
               ref={button}
               className={`menu-toggle ${open ? "is-open" : ""}`}
