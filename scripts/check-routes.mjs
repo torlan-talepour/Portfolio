@@ -13,7 +13,14 @@ check(
   "Default language must be English",
 );
 for (const locale of ["en", "fa"]) {
-  for (const suffix of ["", "/projects/learnify", "/projects/crm-platform"]) {
+  for (const suffix of [
+    "",
+    "/about",
+    "/portfolio",
+    "/contact",
+    "/projects/learnify",
+    "/projects/crm-platform",
+  ]) {
     const path = `/${locale}${suffix}`;
     const response = await fetch(origin + path);
     const html = await response.text();
@@ -52,14 +59,32 @@ for (const locale of ["en", "fa"]) {
         `${path}: obsolete Persian spelling remains`,
       );
     }
-    if (!suffix) {
+    check(
+      !html.includes('id="lab"'),
+      `${path}: obsolete design lab is visible`,
+    );
+    if (!suffix || suffix === "/portfolio") {
       check(
-        html.includes('id="lab"'),
-        `${path}: missing interactive design lab`,
+        html.includes('class="screen-options"'),
+        `${path}: missing interactive gallery`,
       );
       check(
-        html.includes('id="lab-appearance"'),
-        `${path}: missing lab controls`,
+        html.includes("/projects/crm/dashboard-desktop.jpg"),
+        `${path}: missing genuine CRM imagery`,
+      );
+    }
+    if (suffix.startsWith("/projects/")) {
+      check(
+        html.includes(locale === "en" ? "My role" : "نقش من"),
+        `${path}: missing role`,
+      );
+      check(
+        html.includes(locale === "en" ? "Project goal" : "هدف پروژه"),
+        `${path}: missing goal`,
+      );
+      check(
+        html.includes('class="screen-enlarge"'),
+        `${path}: missing internal image viewer`,
       );
     }
     const imgs = [...html.matchAll(/<img\b[^>]*src="([^\"]+)"/g)].map((m) =>
@@ -98,7 +123,7 @@ for (const path of [
 }
 const sitemap = await (await fetch(origin + "/sitemap.xml")).text();
 check(
-  (sitemap.match(/<loc>/g) || []).length === 6,
-  "Sitemap must list six localized URLs",
+  (sitemap.match(/<loc>/g) || []).length === 12,
+  "Sitemap must list twelve localized URLs",
 );
 console.log(`${assertions} checks passed.`);

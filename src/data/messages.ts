@@ -1,10 +1,9 @@
 import type { Locale } from "./portfolio";
 const en = {
   nav: {
+    home: "Home",
     about: "About",
-    lab: "Design lab",
-    work: "Selected work",
-    skills: "Expertise",
+    portfolio: "Portfolio",
     contact: "Contact",
   },
   menu: "Open navigation",
@@ -93,10 +92,9 @@ const en = {
 type Messages = typeof en;
 const fa: Messages = {
   nav: {
+    home: "خانه",
     about: "درباره من",
-    lab: "آزمایشگاه",
-    work: "پروژه‌های منتخب",
-    skills: "مهارت‌ها",
+    portfolio: "نمونه‌کارها",
     contact: "تماس",
   },
   menu: "بازکردن منو",

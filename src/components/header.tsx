@@ -8,6 +8,8 @@ export function Header({ locale }: { locale: Locale }) {
   const [open, setOpen] = useState(false);
   const path = usePathname();
   const m = messages[locale];
+  const segment = path.split("/")[2] || "home";
+  const activePage = segment === "projects" ? "portfolio" : segment;
   const other = locale === "en" ? "fa" : "en";
   const target = path.replace(/^\/(en|fa)(?=\/|$)/, `/${other}`);
   const button = useRef<HTMLButtonElement>(null);
@@ -60,7 +62,11 @@ export function Header({ locale }: { locale: Locale }) {
             aria-label={locale === "en" ? "Main navigation" : "ناوبری اصلی"}
           >
             {Object.entries(m.nav).map(([key, label]) => (
-              <Link href={`/${locale}#${key}`} key={key}>
+              <Link
+                href={`/${locale}${key === "home" ? "" : `/${key}`}`}
+                aria-current={key === activePage ? "page" : undefined}
+                key={key}
+              >
                 {label}
               </Link>
             ))}
@@ -102,7 +108,8 @@ export function Header({ locale }: { locale: Locale }) {
             {Object.entries(m.nav).map(([key, label], i) => (
               <Link
                 key={key}
-                href={`/${locale}#${key}`}
+                href={`/${locale}${key === "home" ? "" : `/${key}`}`}
+                aria-current={key === activePage ? "page" : undefined}
                 onClick={() => setOpen(false)}
               >
                 <span className="mono" aria-hidden="true">
